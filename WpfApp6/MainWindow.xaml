@@ -1,0 +1,104 @@
+﻿<Window x:Class="WpfApp6.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp6"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="850" Width="840" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <local:GridColorConverter x:Key="gridColorConverter"></local:GridColorConverter>
+    </Window.Resources>
+    <Grid>
+        <Grid.Resources>
+
+            <Style TargetType="Label">
+                <Setter Property="Width" Value="300"/>
+                <Setter Property="FontSize" Value="15"/>
+            </Style>
+            <Style TargetType="TextBox">
+                <Setter Property="Text" Value=""/>
+                <Setter Property="Width" Value="150"/>
+            </Style>
+        </Grid.Resources>
+        <StackPanel Orientation="Vertical" Background="#FF424141">
+            <StackPanel Orientation="Horizontal" Margin="0,30,0,20" Height="40" Width="285">
+                <Label Content="IELTS MOCK TEST BOOKING" HorizontalAlignment="Left"  VerticalAlignment="Top" FontWeight="Bold" FontSize="20" Width="286" Foreground="White"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,20,0,30" Background="#FF6C6C6C">
+                <Label Content="How many mock test:" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="160" Margin="20,20,0,20" Foreground="White"/>
+                <ComboBox x:Name="NumOfMockInput" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="30" Margin="0,20,0,20" SelectionChanged="NumOfMockInput_SelectionChanged" FontSize="18"/>
+                <Label Content="Please select slot:" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="160" Margin="50,20,0,20" Foreground="White"/>
+                <ComboBox x:Name="SlotInput" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="30" Margin="0,20,0,20" FontSize="18"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20,20,0,0">
+                <Label Content="First Name:" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="160" Foreground="White" />
+                <TextBox x:Name="FirstNameInput" Tag="" HorizontalAlignment="Left" Height="30" Width="200" TextWrapping="Wrap" VerticalAlignment="Top" BorderBrush="{x:Null}" FontSize="20" TextChanged="FirstNameInput_TextChanged" />
+                <Label Content="Module:" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="160" Margin="50,0,0,0" Foreground="White"/>
+                <ComboBox x:Name="ModuleInput" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="30" SelectionChanged="ModuleInput_SelectionChanged" FontSize="18"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20,20,0,0">
+                <Label Content="Last Name:" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="160" Foreground="White" />
+                <TextBox x:Name="LastNameInput" HorizontalAlignment="Left" Height="30" Width="200" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" TextChanged="LastNameInput_TextChanged"/>
+                <Label Content="Age:" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="160" Margin="50,0,0,0" Foreground="White"/>
+                <TextBox x:Name="AgeInput" Tag="" HorizontalAlignment="Left" Height="30" Width="200" TextWrapping="Wrap" VerticalAlignment="Top" 
+                         ToolTip="{Binding ElementName=AgeText,Path=(Validation.Errors)[0].ErrorContent}" FontSize="20" TextChanged="AgeInput_TextChanged">
+                    <TextBox.Text>
+                        <Binding Path="AgeRule">
+                            <Binding.ValidationRules>
+                                <local:Rule Minimum="0" Maximum="100"></local:Rule>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20,20,0,0">
+                <Label Content="Gender:" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="160" Foreground="White" />
+                <ComboBox x:Name="GenderInput" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="30" FontSize="18"/>
+                <Label Content="Phone Number:" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="160" Foreground="White" Margin="50,0,0,0"/>
+                <TextBox x:Name="PhoneNumberInput" HorizontalAlignment="Left" Height="30" Width="200" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" TextChanged="PhoneNumberInput_TextChanged"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20,20,0,0">
+
+                <Label Content="Credit Card Details:" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="160"  Foreground="White"/>
+                <TextBox x:Name="CreditCardInput" HorizontalAlignment="Left" Height="30" Width="200" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" TextChanged="CreditCardInput_TextChanged"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20,20,0,0">
+                <Label x:Name="AdditionalQuestion" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="350" Foreground="White"/>
+                <ComboBox x:Name="AdditionalQuestionInput" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="30" Visibility="Hidden" FontSize="18"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,30,0,0" Background="#FF6C6C6C">
+                <Button x:Name="BookButton" Content="Book" Width="150" Height="30" HorizontalAlignment="Left" Margin="60,10,0,10" Click="BookButton_Click"/>
+                <Button x:Name="SaveButton" Content="Save" Width="150" Height="30" HorizontalAlignment="Left" Margin="40,10,0,10" Click="Save_Click"/>
+                <Button x:Name="ShowButton" Content="Show" Width="150" Height="30" HorizontalAlignment="Left" Margin="40,10,0,10" Click="DisplayButton_Click"/>
+                <Button x:Name="ResetButton" Content="Reset" Width="150" Height="30" HorizontalAlignment="Left" Margin="40,10,0,10" Click="ResetButton_Click"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,30,0,30">
+                <ComboBox x:Name="SearchKey" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="30" Margin="175,0,0,0" SelectionChanged="SearchKey_SelectionChanged" FontSize="18"/>
+                <TextBox x:Name="SearchInput" HorizontalAlignment="Left" Width="200" Height="30" Margin="20,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20"/>
+                <Button x:Name="SearchButton" Content="Search" Width="100" Height="30" HorizontalAlignment="Left" Margin="20,0,0,0" Click="SearchButton_Click"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Background="#FF6C6C6C">
+                <DataGrid x:Name="gridDisplay" HorizontalAlignment="Center" Height="160" 
+                  Margin="40,10,0,30" VerticalAlignment="Top" Width="760" 
+                  ItemsSource="{Binding Path=myList}" AutoGenerateColumns="False" Background="#FF6C6C6C">
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="Background" Value="{Binding Path=., Converter={StaticResource gridColorConverter}}" />
+                        </Style>
+                    </DataGrid.RowStyle>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="First Name" Width="100" Binding="{Binding 'MyData.FirstName'}"/>
+                        <DataGridTextColumn Header="Last Name" Width="100" Binding="{Binding 'MyData.LastName'}"/>
+                        <DataGridTextColumn Header="Gender" Width="70" Binding="{Binding 'MyData.Gender'}"/>
+                        <DataGridTextColumn Header="Age" Width="60" Binding="{Binding 'MyData.Age'}"/>
+                        <DataGridTextColumn Header="Phone Number" Width="120" Binding="{Binding 'MyData.PhoneNumber'}"/>
+                        <DataGridTextColumn Header="Module" Width="80" Binding="{Binding 'MyData.ModuleType'}"/>
+                        <DataGridTextColumn Header="Exam Time" Width="90" Binding="{Binding ApptTime}"/>
+                        <DataGridTextColumn Header="Credit Card Number" Width="140" Binding="{Binding 'MyData.ViewCreditCardNumber'}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
